@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Sign-Up-Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function save(){
+            var fieldname=document.getElementById('username').value;
+            localStorage.setItem('user1',fieldname);
+            var fieldmail=document.getElementById('email').value;
+            localStorage.setItem('email1',fieldmail);
+            var fieldpass=document.getElementById('pass').value;
+            localStorage.setItem('pass1',fieldpass);
+            say()
+        }
+        function say(){
+            console.log('Sign-Up Successful');
+            window.location.href="/index.html";
+        }
+        function signup(){
+            alert('Enter your credentials to sign up')
+        }
+    </script>
+</head>
+<body class="up" onpageshow="signup()">
+    <div class="container">
+        <h4>Sign-up</h4>
+        <form>
+        <input type="text" id="username" placeholder="user-name" required><hr>
+        <input type="email" id="email" placeholder="email-id" required><hr>
+        <input type="password" id="pass" placeholder="passward" required><hr>
+        <button onclick="save()" type="button">sign-up</button>
+        </form>
+        <p>Already a user?
+            <button type="button" onclick="window.location.href='index.html'">login</button>
+        </p>
+      </div>
+</body>
+</html>

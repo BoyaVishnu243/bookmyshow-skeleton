@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Seat Selection Page
+        </title>
+        <script>
+            var arr=[]
+            function selected(i){
+                var element=document.getElementById(i);
+                element.classList.toggle("dark-mode")
+            }
+        </script>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="flex-container">
+            <div class="seat" id="1" onclick="selected(1)">01</div>
+            <div class="seat" id="2" onclick="selected(2)">02</div>
+            <div class="seat" id="3" onclick="selected(3)">03</div>
+            <div class="seat" id="4" onclick="selected(4)">04</div>
+            <div class="seat" id="5" onclick="selected(5)">05</div>
+            <div class="seat" id="6" onclick="selected(6)">06</div>
+            <div class="seat" id="7" onclick="selected(7)">07</div>
+            <div class="seat" id="8" onclick="selected(8)">08</div>
+            <div class="seat" id="9" onclick="selected(9)">09</div>
+        </div>
+        <div class="flex-container">
+
+        </div>
+    </body>
+</html>

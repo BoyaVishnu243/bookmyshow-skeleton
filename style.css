@@ -1,0 +1,44 @@
+body {
+    background: url('cinema.jpg') no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+.main {
+    border:3px solid;
+    text-align: center;
+    color: white;
+}
+.font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    font-weight: 200;
+    color: yellow;
+}
+.container {
+    width: 300px;
+    padding: 15px;
+    border: 1px solid;
+    color: black;
+    border-radius: 5px;
+    margin: auto;
+    background-color: rgb(196, 188, 188);
+}
+.up {
+    background: url('page3.jpg') no-repeat;
+    background-size: cover;
+}
+.flex-container {
+    text-align: center;
+    display: flex;
+    background-color: dodgerblue;
+}
+.seat{
+    background-color: grey;
+    margin:10px;
+    padding: 20px;
+    font-size: 30px;
+}
+.dark-mode {
+    background-color: chocolate;
+}
