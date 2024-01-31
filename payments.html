@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>PaymentSummaryPage</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      let seats = localStorage.getItem('seats');
+      let total = localStorage.getItem('total');
+      function show() {
+        document.getElementById('line1').innerHTML =
+          'Selected seats are :' + seats;
+        document.getElementById('line2').innerHTML =
+          'Total amount is :' + total;
+      }
+      function showSuccess() {
+        alert('✅ ' + 'Payment Successful');
+        window.location.href = 'seats.html';
+      }
+      function cancel() {
+        alert('Payment Cancelled');
+        window.location.href = 'seats.html';
+      }
+    </script>
+  </head>
+  <body onload="show()">
+    <div class="payment">
+      <h4>Payment Details</h4>
+      <p id="line1"></p>
+      <p id="line2"></p>
+      <button onclick="showSuccess()">confirm booking</button>
+      <button onclick="cancel()">cancel booking</button>
+    </div>
+  </body>
+</html>

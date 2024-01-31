@@ -1,26 +1,28 @@
 <!doctype html>
-<html lang ="en">
-  <head">
+<html lang="en">
+  <head>
     <meta charset="utf8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>BookMyShow</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>LoginPage</title>
+    <link rel="stylesheet" href="style.css" />
     <script>
-      function check(){
-        var storedname=localStorage.getItem('user1');
-        var storedpass=localStorage.getItem('pass1');
-        if(storedname==document.getElementById('login-name').value && storedpass==document.getElementById('login-pass').value){
+      function check() {
+        var storedname = localStorage.getItem('user1');
+        var storedpass = localStorage.getItem('pass1');
+        if (
+          storedname == document.getElementById('login-name').value &&
+          storedpass == document.getElementById('login-pass').value
+        ) {
           alert('You have login successfully');
           redirectToSeats();
-        }
-        else{
-          alert('Invalid Login credentials')
+        } else {
+          alert('Invalid Login credentials');
         }
       }
-      function redirectToSeats(){
-        window.location.href="/seats.html"
+      function redirectToSeats() {
+        window.location.href = '/seats.html';
       }
-      function welcome(){
+      function welcome() {
         alert('Welcome to Online Ticket Booking');
       }
     </script>
@@ -30,12 +32,21 @@
     <div class="container">
       <h4>Sign-in</h4>
       <form>
-      <input type="text" id="login-name" placeholder="username" required><hr>
-      <input type="password" id="login-pass" placeholder="passward" required><hr>
-      <input type="button" onclick="check()" value="Submit">
+        <input type="text" id="login-name" placeholder="username" required />
+        <hr />
+        <input
+          type="password"
+          id="login-pass"
+          placeholder="passward"
+          required
+        />
+        <hr />
+        <input type="button" onclick="check()" value="Submit" />
       </form>
       <p>Dont have an account? Create an account</p>
-      <button type="button" onclick="window.location.href='sign-up.html'">sign-up</button>
+      <button type="button" onclick="window.location.href='sign-up.html'">
+        sign-up
+      </button>
     </div>
   </body>
 </html>
