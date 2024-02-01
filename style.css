@@ -33,6 +33,7 @@ body {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   background-color: dodgerblue;
 }
 .seat {
@@ -40,10 +41,12 @@ body {
   margin: 10px;
   padding: 20px;
   font-size: 30px;
-  border-color: chartreuse;
 }
 .dark-mode {
   background-color: chocolate;
+}
+.blocked {
+  background-color: greenyellow;
 }
 .seat-select {
   background-color: beige;

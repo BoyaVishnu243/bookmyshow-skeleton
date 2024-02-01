@@ -4,20 +4,21 @@
     <title>SeatSelectionPage</title>
     <script>
       var block = new Set();
+      var arr = [];
       var total = 0;
       var str = '';
       function selected(i) {
         var element = document.getElementById(i);
         element.classList.toggle('dark-mode');
       }
-      function local(item, amount) {
+      function local(item, amount, block) {
         localStorage.setItem('seats', item);
         localStorage.setItem('total', amount);
       }
       function saveSeats() {
         str = '';
         total = 0;
-        for (var i = 1; i <= 9; i++) {
+        for (var i = 1; i <= 18; i++) {
           var element = document.getElementById(i);
           if (element.className == 'seat dark-mode' && !block.has(i)) {
             block.add(i);
@@ -38,13 +39,28 @@
         console.log(block.size);
         total += 200 * block.size;
         local(str, total);
+        isCheck();
       }
       total += 200 * block.size;
       function display() {
         document.getElementById('line1').innerHTML =
-          'Selected seats are :' + str;
+          'Selected seats are : ' + str;
         document.getElementById('line2').innerHTML =
           'Total amount is :' + total;
+      }
+      function isCheck() {
+        if (str == '') {
+          alert('Please select the seats');
+          window.location.href = 'seats.html';
+        }
+      }
+      function blockSeats() {
+        for (var i = 1; i <= 18; i++) {
+          var element = document.getElementById(i);
+          if (element.className == 'seat dark-mode') {
+            element.className = 'blocked';
+          }
+        }
       }
     </script>
     <link rel="stylesheet" href="style.css" />
@@ -61,6 +77,17 @@
       <div class="seat" id="8" onclick="selected(8)">08</div>
       <div class="seat" id="9" onclick="selected(9)">09</div>
     </div>
+    <div class="flex-container">
+      <div class="seat" id="10" onclick="selected(10)">10</div>
+      <div class="seat" id="11" onclick="selected(11)">11</div>
+      <div class="seat" id="12" onclick="selected(12)">12</div>
+      <div class="seat" id="13" onclick="selected(13)">13</div>
+      <div class="seat" id="14" onclick="selected(14)">14</div>
+      <div class="seat" id="15" onclick="selected(15)">15</div>
+      <div class="seat" id="16" onclick="selected(16)">16</div>
+      <div class="seat" id="17" onclick="selected(17)">17</div>
+      <div class="seat" id="18" onclick="selected(18)">18</div>
+    </div>
     <div class="seat-select">
       <h4>You selected the seats below :</h4>
       <p id="line1"></p>
@@ -68,13 +95,17 @@
       <input
         type="button"
         value="save selection"
-        onclick="saveSeats() & display()"
+        onclick="saveSeats() & display() & isCheck()"
       />
-      <input
-        type="button"
-        value="click to pay"
-        onclick="window.location.href='payments.html'"
-      />
+      <input type="button" value="block seats" onclick="blockSeats()" />
+      <div>click the below to continue payment</div>
+      <div>
+        <input
+          type="button"
+          value="click to pay"
+          onclick="window.location.href='payments.html'"
+        />
+      </div>
     </div>
   </body>
 </html>

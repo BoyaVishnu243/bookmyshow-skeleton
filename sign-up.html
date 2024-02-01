@@ -6,14 +6,12 @@
     <title>Sign-Up-Page</title>
     <link rel="stylesheet" href="style.css" />
     <script>
+      var users = [];
       function save() {
-        var fieldname = document.getElementById('username').value;
-        localStorage.setItem('user1', fieldname);
-        var fieldmail = document.getElementById('email').value;
-        localStorage.setItem('email1', fieldmail);
-        var fieldpass = document.getElementById('pass').value;
-        localStorage.setItem('pass1', fieldpass);
-        say();
+        var fielduser = document.getElementById('username').value;
+        localStorage.setItem('users', fielduser);
+        var fieldpass = document.getElementById('passward').value;
+        localStorage.setItem('pass', fieldpass);
       }
       function say() {
         console.log('Sign-Up Successful');
@@ -22,19 +20,27 @@
       function signup() {
         alert('Enter your credentials to sign up');
       }
+      function validate() {
+        var name = document.getElementById('username').value;
+        var pass = document.getElementById('passward').value;
+        if (name == '' || pass == '') {
+          alert('Enter the correct username or passward!');
+          signup();
+        } else {
+          say();
+        }
+      }
     </script>
   </head>
-  <body class="up" onpageshow="signup()">
+  <body class="up" onload="signup()">
     <div class="container">
       <h4>Sign-up</h4>
       <form>
         <input type="text" id="username" placeholder="user-name" required />
         <hr />
-        <input type="email" id="email" placeholder="email-id" required />
+        <input type="password" id="passward" placeholder="passward" required />
         <hr />
-        <input type="password" id="pass" placeholder="passward" required />
-        <hr />
-        <button onclick="save()" type="button">sign-up</button>
+        <button onclick="validate() & save()" type="button">sign-up</button>
       </form>
       <p>
         Already a user?
