@@ -6,13 +6,19 @@
     <title>PaymentSummaryPage</title>
     <link rel="stylesheet" href="style.css" />
     <script>
-      let seats = localStorage.getItem('seats');
+      let selected = JSON.parse(localStorage.getItem('selected_seats'));
       let total = localStorage.getItem('total');
+      var line1 = '';
+      var line2 = total;
+      selected.forEach((item) => {
+        line1 += item + ' ';
+      });
+      console.log(selected);
       function show() {
         document.getElementById('line1').innerHTML =
-          'Selected seats are :' + seats;
+          'Selected seats are :' + line1;
         document.getElementById('line2').innerHTML =
-          'Total amount is :' + total;
+          'Total amount is :' + line2;
       }
       function showSuccess() {
         alert('✅ ' + 'Payment Successful');
@@ -21,6 +27,17 @@
       function cancel() {
         alert('Payment Cancelled');
         window.location.href = 'seats.html';
+        let selected = JSON.parse(localStorage.getItem('selected_seats')) || [];
+        selected = [];
+        localStorage.setItem('selected_seats', JSON.stringify(selected));
+      }
+      function blockSeats() {
+        var selected = JSON.parse(localStorage.getItem('selected_seats'));
+        let blocked = JSON.parse(localStorage.getItem('blocked_seats')) || [];
+        selected.forEach((seat) => {
+          blocked.push(seat);
+        });
+        localStorage.setItem('blocked_seats', JSON.stringify(blocked));
       }
     </script>
   </head>
@@ -29,7 +46,7 @@
       <h4>Payment Details</h4>
       <p id="line1"></p>
       <p id="line2"></p>
-      <button onclick="showSuccess() & history.back()">confirm booking</button>
+      <button onclick="showSuccess() & blockSeats()">confirm booking</button>
       <button onclick="cancel()">cancel booking</button>
     </div>
   </body>

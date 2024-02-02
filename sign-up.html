@@ -8,10 +8,16 @@
     <script>
       var users = [];
       function save() {
-        var fielduser = document.getElementById('username').value;
-        localStorage.setItem('users', fielduser);
-        var fieldpass = document.getElementById('passward').value;
-        localStorage.setItem('pass', fieldpass);
+        let username = document.getElementById('username').value;
+        let passward = document.getElementById('passward').value;
+        let users = JSON.parse(localStorage.getItem('user')) || [];
+        let user = {
+          username: username,
+          passward: passward,
+        };
+        users.push(user);
+        localStorage.setItem('user', JSON.stringify(users));
+        console.log(user);
       }
       function say() {
         console.log('Sign-Up Successful');

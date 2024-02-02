@@ -7,20 +7,25 @@
     <link rel="stylesheet" href="style.css" />
     <script>
       function check() {
-        var storedname = localStorage.getItem('users');
-        var storedpass = localStorage.getItem('pass');
-        if (
-          storedname == document.getElementById('login-name').value &&
-          storedpass == document.getElementById('login-pass').value
-        ) {
-          alert('You have login successfully');
-          redirectToSeats();
+        let users = JSON.parse(localStorage.getItem('user')) || [];
+        let name = document.getElementById('login-name').value;
+        let pass = document.getElementById('login-pass').value;
+        if (users.length != 0) {
+          for (var i = 0; i < users.length; i++) {
+            let user = users[i];
+            if (user.username == name && user.passward == pass) {
+              alert('You have login successfully !');
+              redirectToSeats();
+            }
+          }
+        } else if (name == '' || pass == '') {
+          alert('Please enter the valid name or passward!');
         } else {
-          alert('Invalid Login credentials');
+          alert('Invalid credentials');
         }
       }
       function redirectToSeats() {
-        window.location.href = '/seats.html';
+        window.location.href = 'seats.html';
       }
       function welcome() {
         alert('Welcome to Online Ticket Booking');

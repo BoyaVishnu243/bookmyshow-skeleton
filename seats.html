@@ -1,71 +1,82 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>SeatSelectionPage</title>
     <script>
-      var block = new Set();
-      var arr = [];
-      var total = 0;
-      var str = '';
+      var total;
+      var selected_seats;
+      function saveSeats() {
+        if (localStorage.getItem('total') != null) {
+          let totals = localStorage.getItem('total');
+        } else {
+          localStorage.setItem('total', total);
+        }
+        var total = 200;
+        var selected_seats = new Set();
+        for (var i = 1; i <= 18; i++) {
+          var element = document.getElementById(i);
+          if (element.className == 'seat dark-mode' && !selected_seats.has(i)) {
+            selected_seats.add(i);
+          }
+          if (element.className == 'seat dark-mode' && selected_seats.has(i)) {
+            continue;
+          }
+          if (element.className == 'seat' && !selected_seats.has(i)) {
+            continue;
+          }
+          if (element.className == 'seat' && selected_seats.has(i)) {
+            selected_seats.delete(i);
+          }
+        }
+        selected_seats = Array.from(selected_seats);
+        total *= selected_seats.length;
+        display(selected_seats, total);
+        localStorage.setItem('selected_seats', JSON.stringify(selected_seats));
+        localStorage.setItem('total', total);
+      }
       function selected(i) {
         var element = document.getElementById(i);
         element.classList.toggle('dark-mode');
       }
-      function local(item, amount, block) {
-        localStorage.setItem('seats', item);
-        localStorage.setItem('total', amount);
-      }
-      function saveSeats() {
-        str = '';
-        total = 0;
-        for (var i = 1; i <= 18; i++) {
-          var element = document.getElementById(i);
-          if (element.className == 'seat dark-mode' && !block.has(i)) {
-            block.add(i);
-          }
-          if (element.className == 'seat dark-mode' && block.has(i)) {
-            continue;
-          }
-          if (element.className == 'seat' && !block.has(i)) {
-            continue;
-          }
-          if (element.className == 'seat' && block.has(i)) {
-            block.delete(i);
-          }
-        }
-        block.forEach((seat) => {
-          str += seat + ' ';
+      function display(arr, amount) {
+        var line1 = '';
+        var line2 = '';
+        arr.forEach((seat) => {
+          line1 += seat + ' ';
         });
-        console.log(block.size);
-        total += 200 * block.size;
-        local(str, total);
-        isCheck();
-      }
-      total += 200 * block.size;
-      function display() {
+        line2 = amount;
         document.getElementById('line1').innerHTML =
-          'Selected seats are : ' + str;
+          'Selected seats are : ' + line1;
         document.getElementById('line2').innerHTML =
-          'Total amount is :' + total;
+          'Total amount is :' + line2;
       }
-      function isCheck() {
-        if (str == '') {
-          alert('Please select the seats');
+      function checkSeats() {
+        let selected_seats = JSON.parse(localStorage.getItem('selected_seats'));
+        if (selected_seats.length != 0 && total != 0) {
+          window.location.href = 'payments.html';
+        } else {
+          alert('Select and save the seats to continue');
           window.location.href = 'seats.html';
         }
       }
-      function blockSeats() {
-        for (var i = 1; i <= 18; i++) {
-          var element = document.getElementById(i);
-          if (element.className == 'seat dark-mode') {
-            element.className = 'blocked';
+      function showBlocked() {
+        let blocked = JSON.parse(localStorage.getItem('blocked_seats')) || [];
+        for (var i = 0; i < blocked.length; i++) {
+          let element = document.getElementById(blocked[i]);
+          console.log(element.className);
+          for (var j = 1; j <= 18; j++) {
+            if (blocked[i] == j) {
+              element.className = 'seat blocked';
+            }
           }
         }
       }
     </script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body onload="showBlocked()">
     <div class="flex-container">
       <div class="seat" id="1" onclick="selected(1)">01</div>
       <div class="seat" id="2" onclick="selected(2)">02</div>
@@ -92,19 +103,11 @@
       <h4>You selected the seats below :</h4>
       <p id="line1"></p>
       <p id="line2"></p>
-      <input
-        type="button"
-        value="save selection"
-        onclick="saveSeats() & display() & isCheck()"
-      />
-      <input type="button" value="block seats" onclick="blockSeats()" />
-      <div>click the below to continue payment</div>
+      <input type="button" value="save selection" onclick="saveSeats()" />
       <div>
-        <input
-          type="button"
-          value="click to pay"
-          onclick="window.location.href='payments.html'"
-        />
+        <p>save and continue</p>
+        <p>click the below to continue</p>
+        <input type="button" value="click to pay" onclick="checkSeats()" />
       </div>
     </div>
   </body>
