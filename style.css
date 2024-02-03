@@ -34,26 +34,28 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: dodgerblue;
+  background-color: darkturquoise;
 }
 .seat {
   background-color: grey;
   margin: 10px;
   padding: 20px;
+  border-radius: 15px;
   font-size: 30px;
+  cursor: pointer;
 }
 .dark-mode {
-  background-color: chocolate;
+  background-color: mediumslateblue;
 }
 .blocked {
-  background-color: greenyellow;
+  background-color: rgb(240, 76, 76);
 }
 .seat-select {
   background-color: beige;
   align-content: center;
   width: 300px;
   text-align: center;
-  border: 1cm;
+  border-style: groove;
   padding: 15px;
   color: black;
   border-radius: 5px;

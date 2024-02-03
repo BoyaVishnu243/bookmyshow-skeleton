@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>LoginPage</title>
     <link rel="stylesheet" href="style.css" />
@@ -14,7 +14,7 @@
           for (var i = 0; i < users.length; i++) {
             let user = users[i];
             if (user.username == name && user.passward == pass) {
-              alert('You have login successfully !');
+              alert('✅ '+'You have login successfully !');
               redirectToSeats();
             }
           }
@@ -46,10 +46,19 @@
           required
         />
         <hr />
-        <input type="button" onclick="check()" value="Submit" />
+        <input
+          type="button"
+          onclick="check()"
+          value="Submit"
+          style="cursor: pointer"
+        />
       </form>
       <p>Dont have an account? Create an account</p>
-      <button type="button" onclick="window.location.href='sign-up.html'">
+      <button
+        type="button"
+        onclick="window.location.href='sign-up.html'"
+        style="cursor: pointer"
+      >
         sign-up
       </button>
     </div>

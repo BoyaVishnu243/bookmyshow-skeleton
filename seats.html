@@ -1,7 +1,7 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>SeatSelectionPage</title>
     <script>
@@ -15,7 +15,7 @@
         }
         var total = 200;
         var selected_seats = new Set();
-        for (var i = 1; i <= 18; i++) {
+        for (var i = 1; i <= 20; i++) {
           var element = document.getElementById(i);
           if (element.className == 'seat dark-mode' && !selected_seats.has(i)) {
             selected_seats.add(i);
@@ -44,16 +44,17 @@
         var line1 = '';
         var line2 = '';
         arr.forEach((seat) => {
-          line1 += seat + ' ';
+          line1 += seat + ', ';
         });
         line2 = amount;
         document.getElementById('line1').innerHTML =
           'Selected seats are : ' + line1;
         document.getElementById('line2').innerHTML =
-          'Total amount is :' + line2;
+          'Total amount is :' + '$' + line2;
       }
       function checkSeats() {
-        let selected_seats = JSON.parse(localStorage.getItem('selected_seats'));
+        let selected_seats =
+          JSON.parse(localStorage.getItem('selected_seats')) || [];
         if (selected_seats.length != 0 && total != 0) {
           window.location.href = 'payments.html';
         } else {
@@ -66,17 +67,24 @@
         for (var i = 0; i < blocked.length; i++) {
           let element = document.getElementById(blocked[i]);
           console.log(element.className);
-          for (var j = 1; j <= 18; j++) {
+          for (var j = 1; j <= 20; j++) {
             if (blocked[i] == j) {
               element.className = 'seat blocked';
             }
           }
         }
       }
+      function clearSelection() {
+        let selected_seats =
+          JSON.parse(localStorage.getItem('selected_seats')) || [];
+        selected_seats = [];
+        localStorage.setItem('selected_seats', JSON.stringify(selected_seats));
+      }
     </script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="showBlocked()">
+
+  <body onload="showBlocked() & clearSelection()">
     <div class="flex-container">
       <div class="seat" id="1" onclick="selected(1)">01</div>
       <div class="seat" id="2" onclick="selected(2)">02</div>
@@ -87,9 +95,9 @@
       <div class="seat" id="7" onclick="selected(7)">07</div>
       <div class="seat" id="8" onclick="selected(8)">08</div>
       <div class="seat" id="9" onclick="selected(9)">09</div>
+      <div class="seat" id="10" onclick="selected(10)">10</div>
     </div>
     <div class="flex-container">
-      <div class="seat" id="10" onclick="selected(10)">10</div>
       <div class="seat" id="11" onclick="selected(11)">11</div>
       <div class="seat" id="12" onclick="selected(12)">12</div>
       <div class="seat" id="13" onclick="selected(13)">13</div>
@@ -98,17 +106,24 @@
       <div class="seat" id="16" onclick="selected(16)">16</div>
       <div class="seat" id="17" onclick="selected(17)">17</div>
       <div class="seat" id="18" onclick="selected(18)">18</div>
+      <div class="seat" id="19" onclick="selected(19)">19</div>
+      <div class="seat" id="20" onclick="selected(20)">20</div>
     </div>
     <div class="seat-select">
       <h4>You selected the seats below :</h4>
       <p id="line1"></p>
       <p id="line2"></p>
-      <input type="button" value="save selection" onclick="saveSeats()" />
+      <input type="button" value="save selection" onclick="saveSeats()" style="cursor:pointer"/>
       <div>
         <p>save and continue</p>
         <p>click the below to continue</p>
-        <input type="button" value="click to pay" onclick="checkSeats()" />
+        <input type="button" value="click to pay" onclick="checkSeats()" style="cursor:pointer"/>
       </div>
+    </div>
+    <div class="seat-select">
+      <p>Grey - Available</p>
+      <p>Violet - Under Selection</p>
+      <p>Red - Booked</p>
     </div>
   </body>
 </html>
