@@ -1,66 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>LoginPage</title>
-    <link rel="stylesheet" href="style.css" />
-    <script>
-      function check() {
-        let users = JSON.parse(localStorage.getItem('user')) || [];
-        let name = document.getElementById('login-name').value;
-        let pass = document.getElementById('login-pass').value;
-        if (users.length != 0) {
-          for (var i = 0; i < users.length; i++) {
-            let user = users[i];
-            if (user.username == name && user.passward == pass) {
-              alert('✅ '+'You have login successfully !');
-              redirectToSeats();
-            }
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>LoginPage</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    function isUser(user, name, pass) {
+      var flag;
+      flag = user.username == name && user.passward == pass
+      return flag;
+    }
+    function check() {
+      let users = JSON.parse(localStorage.getItem('user')) || [];
+      let name = document.getElementById('login-name').value;
+      let pass = document.getElementById('login-pass').value;
+      if (users.length != 0) {
+        var flag;
+        for (var i = 0; i < users.length; i++) {
+          let user = users[i];
+          flag = isUser(user, name, pass);
+          if (flag == true) {
+            break;
           }
-        } else if (name == '' || pass == '') {
-          alert('Please enter the valid name or passward!');
-        } else {
-          alert('Invalid credentials');
+          else {
+            continue;
+          }
+        }
+        if (flag == true) {
+          alert('✅  You have login successfully');
+          redirectToSeats();
+        }
+        else {
+          alert('❌  Wrong passward or username');
         }
       }
-      function redirectToSeats() {
-        window.location.href = 'seats.html';
-      }
-      function welcome() {
-        alert('Welcome to Online Ticket Booking');
-      }
-    </script>
-  </head>
-  <body onload="welcome()">
-    <div class="main"><h3>Login Page</h3></div>
-    <div class="container">
-      <h4>Sign-in</h4>
-      <form>
-        <input type="text" id="login-name" placeholder="username" required />
-        <hr />
-        <input
-          type="password"
-          id="login-pass"
-          placeholder="passward"
-          required
-        />
-        <hr />
-        <input
-          type="button"
-          onclick="check()"
-          value="Submit"
-          style="cursor: pointer"
-        />
-      </form>
-      <p>Dont have an account? Create an account</p>
-      <button
-        type="button"
-        onclick="window.location.href='sign-up.html'"
-        style="cursor: pointer"
-      >
-        sign-up
-      </button>
-    </div>
-  </body>
+    }
+    function redirectToSeats() {
+      window.location.href = 'seats.html';
+    }
+    function welcome() {
+      alert('Welcome to Online Ticket Booking');
+    }
+  </script>
+</head>
+
+<body onload="welcome()">
+  <div class="main">
+    <h3>Login Page</h3>
+  </div>
+  <div class="container">
+    <h4>Sign-in</h4>
+    <form>
+      <input type="text" id="login-name" placeholder="username" required />
+      <hr />
+      <input type="password" id="login-pass" placeholder="passward" required />
+      <hr />
+      <input type="button" onclick="check()" value="Submit" style="cursor: pointer" />
+    </form>
+    <p>Dont have an account? Create an account</p>
+    <button type="button" onclick="window.location.href='sign-up.html'" style="cursor: pointer">
+      sign-up
+    </button>
+  </div>
+</body>
+
 </html>
