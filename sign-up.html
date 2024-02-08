@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Sign-Up-Page</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      var users = [];
+      function save() {
+        let username = document.getElementById('username').value;
+        let passward = document.getElementById('passward').value;
+        let users = JSON.parse(localStorage.getItem('user')) || [];
+        let user = {
+          username: username,
+          passward: passward,
+        };
+        users.push(user);
+        localStorage.setItem('user', JSON.stringify(users));
+        console.log(user);
+      }
+      function say() {
+        console.log('Sign-Up Successful');
+        window.location.href = 'index.html';
+      }
+      function signup() {
+        alert('Enter your credentials to sign up');
+      }
+      function validate() {
+        var name = document.getElementById('username').value;
+        var pass = document.getElementById('passward').value;
+        if (name == '' || pass == '') {
+          alert('Enter the correct username or passward!');
+          signup();
+        } else {
+          say();
+        }
+      }
+    </script>
+  </head>
+  <body class="up" onload="signup()">
+    <div class="container">
+      <h4>Sign-up</h4>
+      <form>
+        <input type="text" id="username" placeholder="user-name" required />
+        <hr />
+        <input type="password" id="passward" placeholder="passward" required />
+        <hr />
+        <button
+          onclick="validate() & save()"
+          type="button"
+          style="cursor: pointer"
+        >
+          sign-up
+        </button>
+      </form>
+      <p>
+        Already a user?
+        <button
+          type="button"
+          onclick="window.location.href='index.html'"
+          style="cursor: pointer"
+        >
+          login
+        </button>
+      </p>
+    </div>
+  </body>
+</html>
